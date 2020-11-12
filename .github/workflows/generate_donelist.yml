@@ -15,16 +15,17 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get next date
+      id: date
       run: echo "::set-output name=date::$(date '+%Y-%m-%d' --date '33 hours')"
 
     - name: Get next week
-      id: date
-      run: echo "::set-output name=week::$(date '+%D' --date '33 hours')"
+      id: week
+      run: echo "::set-output name=week::$(date '+%a' --date '33 hours')"
 
     - name: Register issue
       uses: imjohnbo/issue-bot@v2.3
       with:
-        title: ${{ steps.date.outputs.date }} (${{ steps.date.outputs.week }}) ${{ github.event.pull_request.title }}
+        title: ${{ steps.date.outputs.date }} (${{ steps.week.outputs.week }}) ${{ github.event.pull_request.title }}
         body: ${{ github.event.pull_request.url }}
         assignees: "tanaka-yohei" # Github Account name without @.
         labels: "release"
