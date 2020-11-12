@@ -1,13 +1,11 @@
 name: Donelist generate
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
 jobs:
   donelist_generate:
-    name: Friday Standup
+    name: Log release history
     runs-on: ubuntu-latest
     steps:
 
@@ -20,10 +18,10 @@ jobs:
       id: date
       run: echo "::set-output name=date::$(date +'%Y/%m/%d')"
 
-    - name: Scheduled Issue
+    - name: Schedule Issue
       uses: imjohnbo/issue-bot@v2.3
       with:
-        title: Test - ${{ steps.date.outputs.date }} ~ 🎣
+        title: Release - ${{ steps.date.outputs.date }}
         assignees: "tanaka-yohei" # Github Account name without @.
         labels: "Test"
         pinned: false
