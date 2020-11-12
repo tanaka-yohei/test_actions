@@ -11,23 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    # Repo code checkout required if `template` is used
     - name: Checkout
       uses: actions/checkout@v2
 
-    # https://stackoverflow.com/a/60942437
     - name: Get current date
       id: date
-      run: echo "::set-output name=date::$(date +'%Y/%m/%d')"
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
-    - name: Schedule Issue
+    - name: Register issue
       uses: imjohnbo/issue-bot@v2.3
       with:
-        title: Release - ${{ steps.date.outputs.date }}
+        title: ${{ steps.date.outputs.date }}
+        body: PR_name
         assignees: "tanaka-yohei" # Github Account name without @.
-        labels: "Test"
+        labels: "release"
         pinned: false
         close-previous: true
-        template: ".github/ISSUE_TEMPLATE/generate_donelist.md"
+        template: ".github/ISSUE_TEMPLATE/RELEASE.md"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
