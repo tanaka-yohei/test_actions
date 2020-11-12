@@ -26,7 +26,7 @@ jobs:
       uses: imjohnbo/issue-bot@v2.3
       with:
         title: ${{ steps.date.outputs.date }} (${{ steps.week.outputs.week }}) ${{ github.event.pull_request.title }}
-        body: ${{ github.event.pull_request.url }}
+        body: https://github.com/${{ github.event.repository.full_name }}/pull/${{ github.event.pull_request.number }}
         assignees: "tanaka-yohei" # Github Account name without @.
         labels: "release"
         pinned: false
