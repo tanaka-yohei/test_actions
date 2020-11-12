@@ -1,0 +1,33 @@
+name: Donelist generate
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  donelist_generate:
+    name: Friday Standup
+    runs-on: ubuntu-latest
+    steps:
+
+    # Repo code checkout required if `template` is used
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # https://stackoverflow.com/a/60942437
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y/%m/%d')"
+
+    - name: Scheduled Issue with YamatoOtaka
+      uses: imjohnbo/issue-bot@v2.3
+      with:
+        title: YamatoOtaka - ${{ steps.date.outputs.date }} ~ 🎣
+        assignees: "YamatoOtaka" # Github Account name without @.
+        labels: "YamatoOtaka"
+        pinned: false
+        close-previous: true
+        template: ".github/ISSUE_TEMPLATE/generate_donelist.md"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
