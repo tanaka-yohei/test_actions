@@ -16,7 +16,7 @@ jobs:
 
     - name: Get current date
       id: date
-      run: echo "::set-output name=date::$(date -d tomorrow +'%Y-%m-%d')"
+      run: echo "::set-output name=date::$(date '+%Y-%m-%d' --date '1 days')"
 
     - name: Register issue
       uses: imjohnbo/issue-bot@v2.3
