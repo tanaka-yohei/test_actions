@@ -21,8 +21,8 @@ jobs:
     - name: Register issue
       uses: imjohnbo/issue-bot@v2.3
       with:
-        title: ${{ steps.date.outputs.date }}
-        body: https://github.com/tanaka-yohei/test_actions/pull/${{ github.event.number }}
+        title: ${{ steps.date.outputs.date }} ${{ github.event.pull_request.title }}
+        body: ${{ github.event.pull_request.url }}
         assignees: "tanaka-yohei" # Github Account name without @.
         labels: "release"
         pinned: false
