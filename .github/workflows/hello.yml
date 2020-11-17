@@ -8,4 +8,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Hello
-        uses: actions/action.yml
+        uses: ../actions
